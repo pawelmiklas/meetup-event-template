@@ -3,9 +3,18 @@
 @import "partials/mixins";
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900');
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700');
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: $mainFont;
     overflow-x: hidden;
+    width: 100%;
+}
+
+main {
+    width: 100%;
 }
 
 .logo {
@@ -16,6 +25,10 @@ header {
     min-height: 780px;
     background-color: $grayColor;
     z-index: -10;
+    .navbar-toggler {
+        border: none;
+        outline: none;
+    }
     ul {
         li {
             padding: em-calc(0px 10px);
@@ -23,6 +36,9 @@ header {
     }
     .container--fixed {
         min-height: 580px;
+        @include media-breakpoint-down(xs) {
+            padding-bottom: em-calc(170px);
+        }
     }
     .counter {
         max-width: 972px;
@@ -31,6 +47,15 @@ header {
         border: solid $greenColor 2px;
         border-radius: em-calc(10px);
         margin-top: em-calc(120px);
+        @include media-breakpoint-down(xs) {
+            margin-top: em-calc(80px) !important;
+        }
+        @media (max-width: 991.98px) {
+            margin-top: em-calc(40px);
+        }
+        @media (max-width: 464px) {
+            margin-bottom: em-calc(10px);
+        }
         &__border {
             padding: 0 3em;
             .col {
@@ -56,9 +81,22 @@ header {
                     right: 0;
                     top: 5%;
                 }
-                &:last-child {
+                @media only screen and (max-width: 468px) {
                     &:before {
                         content: "";
+                    }
+                }
+                @media (max-width: 991.98px) {
+                    &:nth-of-type(2) {
+                        &:before {
+                            content: "";
+                        }
+                    }
+                }
+                &:last-child {
+                    &:before {
+                        content: ":";
+                        visibility: hidden;
                     }
                 }
             }
@@ -73,26 +111,41 @@ header {
                 top: -80px;
                 left: 0%;
                 z-index: 10;
+                @include media-breakpoint-down(sm) {
+                    left: -10%;
+                }
             }
             &:nth-of-type(2) {
                 top: -90px;
                 left: 12%;
                 z-index: 9;
+                @include media-breakpoint-down(md) {
+                    left: 18%;
+                }
             }
             &:nth-of-type(3) {
                 top: -100px;
                 left: 24%;
                 z-index: 8;
+                @include media-breakpoint-down(md) {
+                    left: 38%;
+                }
             }
             &:nth-of-type(4) {
                 top: -110px;
                 left: 36%;
                 z-index: 7;
+                @include media-breakpoint-down(md) {
+                    left: 58%;
+                }
             }
             &:nth-of-type(5) {
                 top: -120px;
                 left: 46%;
                 z-index: 6;
+                @include media-breakpoint-down(md) {
+                    left: 78%;
+                }
             }
         }
     }
@@ -110,6 +163,9 @@ main {
     position: relative; // overflow-x: hidden;
     // overflow-y: visible;
     z-index: 10;
+    @media (max-width: 991.98px) {
+        margin-bottom: em-calc(195px);
+    }
     &::before {
         content: '';
         position: absolute; // top: 50%;
@@ -117,7 +173,7 @@ main {
         width: 110vw;
         top: -112px;
         height: 230px;
-        transform: rotate(-5deg);
+        transform: rotate(-4.2deg);
         background: $whiteColor;
         z-index: -1;
     }
@@ -132,6 +188,9 @@ main {
         }
         .tiles {
             margin-top: -150px;
+            @media (max-width: 991.98px) {
+                margin-top: 0;
+            }
             h2 {
                 font-weight: bold;
             }
@@ -154,9 +213,20 @@ main {
             img {
                 width: 30px;
             }
+            .col-sm-7 {
+                @include media-breakpoint-down(xs) {
+                    justify-content: center !important;
+                }
+            }
+            .fixed-position-text {
+                text-align: center !important;
+            }
         }
     }
     &__info {
+        @media (max-width: 991.98px) {
+            padding-bottom: em-calc(60px);
+        }
         h1 {
             font-weight: 600;
         }
@@ -168,6 +238,10 @@ main {
         // position: absolute;
         // right: 0;
         transform: translateY(-250px);
+        @media (max-width: 991.98px) {
+            transform: translateY(0);
+            padding-bottom: em-calc(60px);
+        }
         form {
             background-color: $whiteColor;
         }
@@ -193,7 +267,7 @@ main {
         font-weight: 300;
         font-size: rem-calc(14px);
         p {
-            width: 830px;
+            max-width: 830px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -212,7 +286,7 @@ main {
         width: 110vw;
         top: -112px;
         height: 230px;
-        transform: rotate(-5deg);
+        transform: rotate(-3.7deg);
         background: $grayColor;
         z-index: -1;
     }
@@ -223,7 +297,7 @@ main {
         left: -20px;
         bottom: -65px;
         height: 150px;
-        transform: rotate(-5deg);
+        transform: rotate(-3.5deg);
         background: $grayColor;
         z-index: -1;
     }
@@ -231,6 +305,9 @@ main {
         max-width: 700px;
         text-align: right;
         position: relative;
+        @include media-breakpoint-down(xs) {
+            text-align: left;
+        }
         img {
             transform: translateY(-210px);
         }
@@ -249,9 +326,10 @@ main {
 
 //SECTION - speakers.
 .speakers {
-    min-height: 1700px;
+    min-height: 1600px;
     width: 100%;
     background-color: $whiteColor;
+    padding: em-calc(150px 0 180px 0);
     &__content {
         background-color: $greenColor;
         width: 100%;
@@ -292,7 +370,7 @@ main {
         width: 110vw;
         top: -112px;
         height: 230px;
-        transform: rotate(-5deg);
+        transform: rotate(-3.7deg);
         background: $grayColor;
         z-index: -1;
     }
@@ -303,7 +381,7 @@ main {
         left: -20px;
         bottom: -65px;
         height: 150px;
-        transform: rotate(-5deg);
+        transform: rotate(-3.5deg);
         background: $grayColor;
         z-index: -1;
     }
@@ -328,6 +406,10 @@ main {
     width: 100%;
     min-height: 1375px;
     background-color: $whiteColor;
+    @include media-breakpoint-down(md) {
+        padding-bottom: em-calc(60px);
+        padding-top: em-calc(80px);
+    }
     &__title {
         max-width: 700px;
         h1 {
@@ -372,7 +454,8 @@ main {
     @include background-image("map.png",
     50% 50%,
     cover);
-    min-height: 660px;
+    min-height: 580px;
+    padding: em-calc(40px 0);
     &__block {
         width: 970px;
         min-height: 530px;
@@ -390,7 +473,15 @@ main {
             resize: none;
         }
         form {
-            width: 400px;
+            max-width: 400px;
+            width: 100%;
+            @include media-breakpoint-up(lg) {
+                padding-right: em-calc(30px);
+            }
+            @include media-breakpoint-down(xs) {
+                padding: em-calc(0 30px);
+                max-width: 460px;
+            }
             input {
                 width: 100%;
             }
@@ -400,6 +491,14 @@ main {
         min-height: 660px;
         .row {
             min-height: 530px;
+            @include media-breakpoint-down(md) {
+                .col-lg-6 {
+                    padding: 3em 0;
+                }
+                .fixed-col {
+                    padding: 3em 0 0 0;
+                }
+            }
         }
     }
 }
@@ -407,8 +506,9 @@ main {
 //FOOTER.
 .footer {
     width: 100%;
-    min-height: 220px;
+    min-height: 180px;
     background-color: $greenColor;
+    padding: em-calc(20px 0);
     .container {
         min-height: 220px;
     }
