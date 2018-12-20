@@ -309,7 +309,7 @@ main {
             text-align: left;
         }
         img {
-            transform: translateY(-210px);
+            transform: translateY(-190px);
         }
         h1 {
             font-weight: bold;
@@ -328,15 +328,66 @@ main {
 .speakers {
     min-height: 1600px;
     width: 100%;
-    background-color: $whiteColor;
     padding: em-calc(150px 0 180px 0);
+    .xd {
+        perspective: 500px;
+        &:hover {
+            .speakers__card {
+                transform: rotateY(180deg);
+                transition: transform 0.5s;
+            }
+        }
+    }
+    &__card {
+        width: 100%;
+        height: 100%;
+        transition: transform 1s;
+        transform-style: preserve-3d;
+    }
     &__content {
         background-color: $greenColor;
         width: 100%;
         height: 100%;
         border-radius: em-calc(20px);
+        position: absolute;
+        backface-visibility: hidden;
         &--fixed {
             background-color: $whiteColor;
+            border-radius: em-calc(20px);
+            width: 100%;
+            height: 100%;
+            z-index: -100;
+        }
+        &--info {
+            transform: rotateY(180deg);
+            position: absolute;
+            backface-visibility: hidden;
+            background-color: $greenLightColor;
+            width: 100%;
+            height: 100%;
+            border-radius: em-calc(20px);
+            padding: em-calc(28px);
+            .info__up {
+                h1 {
+                    font-weight: bold;
+                    line-height: 2.5rem;
+                }
+                p {
+                    font-size: rem-calc(18px);
+                }
+                .line {
+                    max-width: 80px;
+                    height: 5px;
+                    background-color: $whiteColor;
+                }
+            }
+            .info__down {
+                max-width: 170px;
+                img {
+                    width: 35px;
+                    height: 35px;
+                }
+            }
         }
     }
     &__title {
